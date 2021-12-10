@@ -1,13 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import AddUser from "./Components/addUser.js";
+import Home from "./Components/Home";
+import List from "./Components/List";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      <h1>hello</h1>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Home />
+      <Routes>
+        <Route path="/List" element={<List />} />
+        <Route path="/add" element={<AddUser />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

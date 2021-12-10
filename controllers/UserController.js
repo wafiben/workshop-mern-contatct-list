@@ -54,7 +54,7 @@ const updateUser=async(request,response)=>{
     const newUser=request.body
  try {
      const updatedUser =await User.findByIdAndUpdate(id,newUser,{new:true})
-     response.status(200).json({user:updatedUser})
+     response.status(200).json({user:updatedUser,message:'user is updated'})
  } catch (error) {
      response.status(500).json({error:'update failed'})
  }
