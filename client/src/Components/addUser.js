@@ -1,7 +1,9 @@
 import React ,{useState}from "react";
 import {addUser} from "../Redux/actions/actions"
 import {useDispatch} from 'react-redux'
+import {useNavigate} from "react-router"
 const AddUser = () => {
+  const navigate=useNavigate()
   const dispatch=useDispatch();
   const [user,setUser]=useState({username:" ",email:" ",age:" "});
   const handleChange=(event)=>{
@@ -11,6 +13,7 @@ const AddUser = () => {
   event.preventDefault();
   dispatch(addUser(user))
   setUser({username:" ",email:" ",age:" "});
+ 
  }
   return (
     <form onSubmit={onSubmit}>

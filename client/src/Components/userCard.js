@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { deleteUser,getSingleUser } from "../Redux/actions/actions.js";
+import { deleteUser } from "../Redux/actions/actions.js";
 import { useDispatch } from "react-redux";
+import { updateUser,getOneUser } from "../Redux/actions/actions";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { updateUser } from "../Redux/actions/actions";
 const UserCard = ({ user }) => {
-  const navigate=useNavigate();
+  const navigate=useNavigate()
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [updatedUser, setupDated] = useState({
@@ -15,7 +16,6 @@ const UserCard = ({ user }) => {
   const handleChange = (event) => {
     setupDated({ ...updatedUser, [event.target.id]: event.target.value });
   };
-
   const handleClick = () => {
     dispatch(deleteUser(user._id));
   };
@@ -31,9 +31,14 @@ const UserCard = ({ user }) => {
     dispatch(updateUser(user._id, updatedUser));
     setupDated({ username: " ", email: " ", age: " " });
     setShow(false);
-  }; 
+  };
+  const getUser=()=>{
+    dispatch(getOneUser(user._id))
+    navigate('/details')
+  }
+
   return (
-    <div >
+    <div>
       <div className="card text-center" style={{ width: "500px" }}>
         <div className="card-header">User</div>
         <div className="card-body">
@@ -49,6 +54,11 @@ const UserCard = ({ user }) => {
         <button type="button" class="btn btn-success" onClick={handleEdit}>
           Update
         </button>
+
+       <Link to={`/details/${user._id}`}>
+        <button className="btn btn-primary" onClick={getUser}>see user</button>
+        </Link>
+
         {show ? (
           <form onSubmit={onSubmit}>
             <div className="form-group">
@@ -88,9 +98,7 @@ const UserCard = ({ user }) => {
           </form>
         ) : null}
       </div>
-      <div>
-    
-      </div>
+      <div></div>
     </div>
   );
 };

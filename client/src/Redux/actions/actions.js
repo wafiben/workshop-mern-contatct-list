@@ -1,6 +1,5 @@
 import { GET_ALL_USERS } from "./actiontype";
 import axios from "axios";
-import { useDispatch } from "react-redux";
 export const GetUsers = () => async (dispatch) => {
   try {
     const response = await axios.get("/user");
@@ -35,14 +34,13 @@ export const updateUser = (id, user) => async (dispatch) => {
     console.log(error);
   }
 };
-export const getSingleUser=(id)=>async(dispatch)=>{
+export const getOneUser=(id)=>async(dispatch)=>{
   try {
-   const response= await axios.get(`/user/${id}`)
-   console.log(response)
-   dispatch({type:'Single',payload:response.data.user});
-   
-   
+    const response=await axios.get(`/user/${id}`)
+    console.log(response.data.user)
+    dispatch({type:'GET_SINGLE_USER',payload:response.data.user})
   } catch (error) {
     console.log(error)
   }
 }
+
